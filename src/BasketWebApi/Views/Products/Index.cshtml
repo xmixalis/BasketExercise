@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Products";
+    @model ProductsIndexViewModel
+}
+
+<div class="row">
+    @if (Model.ProductItems.Any())
+    {
+        @foreach (var item in Model.ProductItems)
+        {
+            <div class="product-item col-md-4">
+                <partial name="_product" model="item" />
+            </div>
+        }
+    }
+</div>

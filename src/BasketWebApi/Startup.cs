@@ -1,6 +1,8 @@
 ﻿using System;
 using BasketCore;
 using BasketCore.Interfaces;
+using BasketWebApi.Interfaces;
+using BasketWebApi.Services;
 using Infrastructure;
 using Infrastructure.Repos;
 using Microsoft.AspNetCore.Builder;
@@ -57,7 +59,8 @@ namespace BasketWebApi
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
-            services.AddScoped<BasketService, BasketService>();
+            services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IProductService, ProductsService>();
 
             // Add memory cache services
             services.AddMemoryCache();

@@ -9,7 +9,7 @@ using BasketCore.Interfaces;
 
 namespace BasketCore
 {
-    public class BasketService 
+    public class BasketService : IBasketService
     {
         private readonly IAsyncRepository<Basket> _basketRepository;
 

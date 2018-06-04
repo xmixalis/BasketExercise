@@ -15,6 +15,11 @@ namespace BasketWebApi.Controllers
             return View();
         }
 
+        public IActionResult Products()
+        {
+            ProductsIndexViewModel pv = new ProductsIndexViewModel();
+            return View(pv);
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
