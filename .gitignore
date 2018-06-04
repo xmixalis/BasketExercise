@@ -5,3 +5,15 @@
 /.vs/slnx.sqlite
 /.vs/BasketExercise/v15/.suo
 /src/BasketCore/obj
+/src/.vs/BasketExcersize/v15
+/src/ApiClient/bin/Debug/netstandard2.0
+/src/ApiClient/obj
+/src/BasketCore/bin/Debug/netstandard2.0
+/src/BasketWebApi/bin/Debug
+/src/BasketWebApi/obj
+/src/Infrastructure/bin/Debug/netstandard2.0
+/src/Infrastructure/obj
+/src/Tests/bin/Debug/netcoreapp2.1
+/src/Tests/obj
+/src/.vs
+/.vs
