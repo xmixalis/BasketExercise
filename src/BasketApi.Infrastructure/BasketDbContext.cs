@@ -32,7 +32,6 @@ namespace BasketApi.Infrastructure
             builder.ToTable("Product");
 
             builder.Property(ci => ci.Id)
-                //.ForSqlServerUseSequenceHiLo("catalog_hilo")
                 .IsRequired();
 
             builder.Property(ci => ci.Name)
@@ -43,52 +42,6 @@ namespace BasketApi.Infrastructure
                 .IsRequired(true);
 
         }
-/*
-        private void ConfigureCatalogBrand(EntityTypeBuilder<CatalogBrand> builder)
-        {
-            builder.ToTable("CatalogBrand");
-
-            builder.HasKey(ci => ci.Id);
-
-            builder.Property(ci => ci.Id)
-               .ForSqlServerUseSequenceHiLo("catalog_brand_hilo")
-               .IsRequired();
-
-            builder.Property(cb => cb.Brand)
-                .IsRequired()
-                .HasMaxLength(100);
-        }
-
-        private void ConfigureCatalogType(EntityTypeBuilder<CatalogType> builder)
-        {
-            builder.ToTable("CatalogType");
-
-            builder.HasKey(ci => ci.Id);
-
-            builder.Property(ci => ci.Id)
-               .ForSqlServerUseSequenceHiLo("catalog_type_hilo")
-               .IsRequired();
-
-            builder.Property(cb => cb.Type)
-                .IsRequired()
-                .HasMaxLength(100);
-        }
-
-        private void ConfigureOrder(EntityTypeBuilder<Order> builder)
-        {
-            var navigation = builder.Metadata.FindNavigation(nameof(Order.OrderItems));
-
-            navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            builder.OwnsOne(o => o.ShipToAddress);
-        }
-
-        private void ConfigureOrderItem(EntityTypeBuilder<OrderItem> builder)
-        {
-            builder.OwnsOne(i => i.ItemOrdered);
-        }
-        */
-
     }
 
 }

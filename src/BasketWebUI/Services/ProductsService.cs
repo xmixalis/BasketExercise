@@ -32,7 +32,7 @@ namespace BasketWebUI.Services
             BasketApiClient client = new BasketApiClient("http://localhost:54000");
             IEnumerable<ProductModelResponse> items = client.ProductService.GetProductsAsync().Result;
             
-            //imrovent could be to add paging 
+            //imrovment could be to add paging 
             ProductsIndexViewModel result = new ProductsIndexViewModel()
             {
                 ProductItems = items.Select(i=> new ProductItemViewModel()

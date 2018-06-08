@@ -73,7 +73,6 @@ namespace BasketApi.Web
             else
                 app.UseExceptionHandler("/Error");
 
-            //app.UseMvc();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();

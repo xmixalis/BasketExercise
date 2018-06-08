@@ -7,9 +7,9 @@ namespace BasketApi.Models
 {
     public class BasketUpdateItem
     {
-        [JsonProperty("productid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("productid")]
         public int ProductId { get; set; }
-        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity")]
         public int Quantity { get; set; }
     }
 }

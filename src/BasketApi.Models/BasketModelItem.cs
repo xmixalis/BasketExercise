@@ -7,13 +7,13 @@ namespace BasketApi.Models
 {
     public class BasketModelItem
     {
-        [JsonProperty("productid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("productid")]
         public int ProductId { get; set; }
-        [JsonProperty("productname", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("productname")]
         public string ProductName { get; set; }
-        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("price")]
         public decimal Price { get; set; }
-        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity")]
         public int Quantity { get; set; }
     }
 }

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace BasketApi.Models
 {
     public class BasketModelResponse
     {
-        [JsonProperty("basketid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("basketid")]
         public int BasketId { get; set; }
-        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("userid")]
+        public string UserId { get; set; }
+        [JsonProperty("items")]
         public IEnumerable<BasketModelItem> Items { get; set; }
     }
 }

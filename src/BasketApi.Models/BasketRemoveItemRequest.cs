@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace BasketApi.Models
 {
     public class BasketRemoveItemRequest
     {
-        [JsonProperty("productid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("productid")]
         public int ProductId { get; set; }
     }
 }

@@ -38,12 +38,11 @@ namespace BasketWebUI.Services
         {
             BasketIndexViewModel model = new BasketIndexViewModel();
             model.Id = basket.BasketId;
-            //model.UserId = basket.UserId;
+            model.UserId = basket.UserId;
             model.BasketItems = basket.Items.Select(i =>
             {
                 BasketItemViewModel itemModel = new BasketItemViewModel()
                 {
-                    //Id = i.ProductId,
                     UnitPrice = i.Price,
                     Quantity = i.Quantity,
                     ProductItemId = i.ProductId,

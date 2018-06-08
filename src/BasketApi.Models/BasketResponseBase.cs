@@ -7,7 +7,7 @@ namespace BasketApi.Models
 {
     public class BasketResponseBase
     {
-        [JsonProperty("ok", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ok")]
         public bool Success { get; set; }
     }
 }
