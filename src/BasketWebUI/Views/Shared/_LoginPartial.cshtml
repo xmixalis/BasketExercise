@@ -1,0 +1,19 @@
+@using Microsoft.AspNetCore.Identity
+@if (Context.User.Identity.IsAuthenticated)
+{
+<form asp-area="" asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
+    <ul class="nav navbar-nav">
+        <li><a class="esh-identity-item" asp-controller="Manage" asp-action="Index">My account</a></li>
+        <li><a class="esh-identity-item" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+        <li>@await Component.InvokeAsync("Basket", User.Identity.Name)</li>
+    </ul>
+</form>
+}
+else
+{<form  class="navbar-right">
+    <ul class="nav navbar-nav">
+        <li><a class="esh-identity-item" asp-controller="Account" asp-action="SignIn">Login</a></li>
+        <li>@await Component.InvokeAsync("Basket")</li>
+    </ul>
+</form>
+}

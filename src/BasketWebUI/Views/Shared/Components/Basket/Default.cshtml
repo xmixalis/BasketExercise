@@ -1,0 +1,14 @@
+﻿@model BasketComponentViewModel
+
+@{
+    ViewData["Title"] = "My Basket";
+}
+
+<a class="esh-basketstatus "
+   asp-area=""
+   asp-controller="Basket"
+   asp-action="Index">
+        <div class="esh-basketstatus-badge">
+            @Model.ItemsCount
+        </div>
+</a>

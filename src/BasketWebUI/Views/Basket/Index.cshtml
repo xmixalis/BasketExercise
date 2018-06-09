@@ -3,59 +3,50 @@
     @model BasketIndexViewModel
 }
 
-
-
-
-
-
 <div class="container">
     @if (Model.BasketItems.Any())
     {
         <form method="post">
-            <article class="esh-basket-titles row">
+            <article class="basket-titles row">
                 <br />
-                <section class="esh-basket-title col-xs-3">Product</section>
-                <section class="esh-basket-title col-xs-3 hidden-lg-down"></section>
-                <section class="esh-basket-title col-xs-2">Price</section>
-                <section class="esh-basket-title col-xs-2">Quantity</section>
-                <section class="esh-basket-title col-xs-2">Cost</section>
+                <section class="basket-title col-xs-4">Product</section>
+                <section class="basket-title col-xs-3">Price</section>
+                <section class="basket-title col-xs-2">Quantity</section>
+                <section class="basket-title col-xs-3">Cost</section>
             </article>
-            <div class="esh-catalog-items row">
+            <div class="row">
                 @for (int i = 0; i < Model.BasketItems.Count; i++)
                 {
                     var item = Model.BasketItems[i];
-                    <article class="esh-basket-items row">
+                    <article class="basket-item-row row">
                         <div>
-                            <section class="esh-basket-item esh-basket-item--middle col-xs-3">@item.ProductName</section>
-                            <section class="esh-basket-item esh-basket-item--middle col-xs-2">$ @item.UnitPrice.ToString("N2")</section>
-                            <section class="esh-basket-item esh-basket-item--middle col-xs-2">
+            
+                            <section class="basket-item col-xs-4">@item.ProductName</section>
+                            <section class="basket-item col-xs-3">$ @item.UnitPrice.ToString("N2")</section>
+                            <section class="basket-item col-xs-2">
                                 <input type="hidden" name="@("Items[" + i + "].Key")" value="@item.ProductItemId" />
-                                <input type="number" class="esh-basket-input" min="1" name="@("Items[" + i + "].Value")" value="@item.Quantity" />
+                                <input type="number" class="basket-input" min="1" name="@("Items[" + i + "].Value")" value="@item.Quantity" />
                             </section>
-                            <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-xs-2">$ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
+                            <section class="basket-item col-xs-3">£ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
                         </div>
                         <div class="row">
                         </div>
                     </article>
-
-                    <div class="container">
-                        <article class="esh-basket-titles esh-basket-titles--clean row">
-                            <section class="esh-basket-title col-xs-10"></section>
-                            <section class="esh-basket-title col-xs-2">Total</section>
-                        </article>
-                        <article class="esh-basket-items row">
-                            <section class="esh-basket-item col-xs-10"></section>
-                            <section class="esh-basket-item esh-basket-item--mark col-xs-2">$ @Model.Total()</section>
-                        </article>
-                        <article class="esh-basket-items row">
-                            <section class="esh-basket-item col-xs-7"></section>
-                            <section class="esh-basket-item col-xs-2">
-                            </section>
-                        </article>
-                    </div>
                 }
-                <section class="esh-basket-item col-xs-push-8 col-xs-4">
-                    <button class="btn esh-basket-checkout" name="updatebutton" value="" type="submit"
+
+                <div class="container">
+                    <article class="basket-titles basket-items row">
+                        <section class="basket-title col-xs-9"></section>
+                        <section class="basket-title col-xs-3">Total</section>
+                    </article>
+                    <article class="basket-items row">
+                        <section class="basket-item col-xs-9"></section>
+                        <section class="basket-item col-xs-3">£ @Model.Total()</section>
+                    </article>
+                </div>
+
+                <section class="basket-item col-xs-push-9 col-xs-3">
+                    <button class="btn basket-checkout" name="updatebutton" value="" type="submit"
                             asp-action="UpdateBasket">
                         Update
                     </button>
@@ -65,7 +56,7 @@
     }
     else
     {
-        <div class="esh-catalog-items row">
+        <div class="basket-empty row">
             Basket is empty.
         </div>
     }

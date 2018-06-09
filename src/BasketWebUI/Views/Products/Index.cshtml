@@ -8,8 +8,10 @@
     {
         @foreach (var item in Model.ProductItems)
         {
-            <div class="product-item col-md-4">
-                <partial name="_product" model="item" />
+            <div class="col-md-3">
+                <div class="product-item">
+                    <partial name="_product" model="item" />
+                </div>
             </div>
         }
     }

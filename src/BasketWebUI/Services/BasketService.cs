@@ -88,5 +88,15 @@ namespace BasketWebUI.Services
 
             return response;
         }
+
+        public async Task<BasketRemoveItemResponse> RemoveBasketItem(int basketId, int productId)
+        {
+            BasketApiClient client = new BasketApiClient("http://localhost:54000");
+            BasketRemoveItemResponse response =
+                await client.BasketService.RemoveBasketItem(
+                    basketId, 
+                    new BasketRemoveItemRequest() { ProductId = productId });
+            return response;
+        }
     }
 }

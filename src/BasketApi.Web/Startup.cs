@@ -31,6 +31,16 @@ namespace BasketApi.Web
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             // use in-memory database
+            ConfigureInMemoryDatabases(services);
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            // use in-memory database. 
+            // improvement to configure a persistent db like sql server
+            ConfigureInMemoryDatabases(services);
 
             ConfigureServices(services);
         }
@@ -45,7 +55,7 @@ namespace BasketApi.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureInMemoryDatabases(services);
+            
 
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));

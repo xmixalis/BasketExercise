@@ -21,6 +21,14 @@
     width: 100%;
 }
 
+.product-item {
+    border-radius: 10px;
+    padding: 5px;
+    border: 2px solid black;
+    margin: 5px;
+}
+
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
@@ -32,4 +40,40 @@
     .carousel-caption {
         display: none;
     }
+}
+
+
+.basket {
+    min-height: 80vh;
+
+}
+.basket-titles {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+.basket-titles-clean {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+
+.basket-title {
+    text-transform: uppercase;
+
+}
+
+.basket-items {
+    padding: 2px;
+    margin: 2px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.basket-item-row {
+    padding: 2px;
+    margin: 2px;
+}
+.basket-input {
+    line-height: 1rem;
+    width: 100%;
 }

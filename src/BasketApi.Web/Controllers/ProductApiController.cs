@@ -22,7 +22,7 @@ namespace BasketApi.Web.Controllers
         [HttpGet("list")]
         public async Task<List<ProductModelResponse>> GetProducts()
         {
-            List<ProductItem> productItems = await _productsService.GetAllItems();
+            List<ProductItem> productItems = await _productsService.GetAllItemsAsync();
             List<ProductModelResponse> response = productItems.Select(p => p.ToProductModelResponse()).ToList();
             return response;
         }

@@ -20,15 +20,35 @@ namespace BasketApi.Web.Controllers
             _productsService = productService;
         }
 
+        /// <summary>
+        /// Action that returns a basket for a specific user. 
+        /// </summary>
+        /// <param name="userid">User Id for the basket</param>
+        /// <returns>
+        /// The basket from the database. 
+        /// If no basket is found for the user, a new one is created.
+        /// </returns>
         [HttpGet("{userid}")]
         public async Task<BasketModelResponse> GetForUser(string userid)
         {
             Basket b = await _basketService.GetOrCreateBasketForUser(userid);
-            List<ProductItem> productItems = await _productsService.GetAllItems();
+
+            //query the product items to add extra product details to the response
+            int[] productIds = b.Items.Select(item => item.ProductItemId).ToArray();
+            IEnumerable<ProductItem> productItems = 
+                await _productsService.ListAsync(p=> productIds.Contains(p.Id));
+
+            b.UserId = userid;
             BasketModelResponse response = b.ToBasketModelResponse(productItems);
             return response;
         }
 
+        /// <summary>
+        /// Action that updates the quantities for a specific basket 
+        /// </summary>
+        /// <param name="basketid">Basket ID</param>
+        /// <param name="requestObject">List of the items with the quantities to be updated</param>
+        /// <returns>Success if it is successfull</returns>
         [HttpPost("Update/{basketid}")]
         public async Task<IActionResult> UpdateBasket(int basketid, [FromBody]BasketUpdateItemsRequest requestObject)
         {
@@ -37,6 +57,12 @@ namespace BasketApi.Web.Controllers
             return Ok(new BasketUpdateResponse() { Success = true });
         }
 
+        /// <summary>
+        /// Action that removes an item from the basket
+        /// </summary>
+        /// <param name="basketid">Basket ID</param>
+        /// <param name="request">Product ID to be removed</param>
+        /// <returns>Success if it is successfull</returns>
         [HttpPost("RemoveItem/{basketid}")]
         public async Task<IActionResult> RemoveItemFromBasket(int basketid, [FromBody]BasketRemoveItemRequest request)
         {
@@ -44,6 +70,13 @@ namespace BasketApi.Web.Controllers
             return Ok(new BasketRemoveItemResponse() { Success = true });
         }
 
+        /// <summary>
+        /// Action that adds an item to the basket.
+        /// If the item exists, it increases the quantity.
+        /// </summary>
+        /// <param name="basketid">Basket ID</param>
+        /// <param name="request">Item to be added with details</param>
+        /// <returns>Success if it is successfull</returns>
         [HttpPost("AddItem/{basketid}")]
         public async Task<IActionResult> AddItemToBasket(int basketid, [FromBody]BasketAddItemRequest request)
         {

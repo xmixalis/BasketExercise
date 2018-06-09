@@ -26,7 +26,6 @@ namespace BasketApi.Infrastructure.Repos
             return _dbContext.Baskets
                 .Where(b => b.Id == id)
                 .Include(o => o.Items)
-                //.Include($"{nameof(Order.OrderItems)}.{nameof(OrderItem.ItemOrdered)}")
                 .FirstOrDefaultAsync();
         }
 
