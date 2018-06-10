@@ -7,6 +7,9 @@ using System;
 
 namespace BasketApi.Client.Tests
 {
+    /// <summary>
+    /// Products service tests class
+    /// </summary>
     public class ProductTests
     {
         BasketApiClient client = new BasketApiClient("http://localhost:54000");

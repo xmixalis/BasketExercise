@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace BasketApi.Models
 {
+    /// <summary>
+    /// Basic info for a response
+    /// </summary>
     public class BasketResponseBase
     {
         [JsonProperty("ok")]

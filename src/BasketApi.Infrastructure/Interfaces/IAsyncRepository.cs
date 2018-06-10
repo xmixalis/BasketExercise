@@ -7,6 +7,10 @@ using BasketApi.Infrastructure.Entities;
 
 namespace BasketApi.Infrastructure.Interfaces
 {
+    /// <summary>
+    /// Interface for the access to the database entities
+    /// </summary>
+    /// <typeparam name="T">Database entity type</typeparam>
     public interface IAsyncRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(int id);
@@ -15,6 +19,5 @@ namespace BasketApi.Infrastructure.Interfaces
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        int GetNewId();
     }
 }

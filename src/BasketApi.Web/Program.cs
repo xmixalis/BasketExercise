@@ -26,7 +26,7 @@ namespace BasketApi.Web
                 try
                 {
                     var catalogContext = services.GetRequiredService<BasketDbContext>();
-                    DBContextInit.InitAsync(catalogContext, loggerFactory).Wait();
+                    DBContextSeed.InitAsync(catalogContext, loggerFactory).Wait();
 
                 }
                 catch (Exception ex)

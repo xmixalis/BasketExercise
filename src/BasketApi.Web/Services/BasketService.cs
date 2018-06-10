@@ -39,7 +39,6 @@ namespace BasketApi.Web.Services
         {
             //improvement to make the ID of the entity to be auto increment
             Basket basket = new Basket() { UserId = userId };
-            basket.Id = _basketRepository.GetNewId();
             await _basketRepository.AddAsync(basket);
 
             return basket;

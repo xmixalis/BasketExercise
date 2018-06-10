@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BasketApi.Infrastructure
 {
+    /// <summary>
+    /// Class with the entities supported by the Basket database
+    /// </summary>
     public class BasketDbContext : DbContext
     {
         public BasketDbContext(DbContextOptions<BasketDbContext> options) : base(options)
@@ -22,25 +25,15 @@ namespace BasketApi.Infrastructure
 
         private void ConfigureBasket(EntityTypeBuilder<Basket> builder)
         {
-            var navigation = builder.Metadata.FindNavigation(nameof(Basket.Items));
+            builder.ToTable("Basket");
 
+            var navigation = builder.Metadata.FindNavigation(nameof(Basket.Items));
             navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
         }
         
         private void ConfigureProductItem(EntityTypeBuilder<ProductItem> builder)
         {
             builder.ToTable("Product");
-
-            builder.Property(ci => ci.Id)
-                .IsRequired();
-
-            builder.Property(ci => ci.Name)
-                .IsRequired(true)
-                .HasMaxLength(50);
-
-            builder.Property(ci => ci.Price)
-                .IsRequired(true);
-
         }
     }
 

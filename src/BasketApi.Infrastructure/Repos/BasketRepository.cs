@@ -12,14 +12,7 @@ namespace BasketApi.Infrastructure.Repos
     public class BasketRepository : BaseRepository<Basket>, IBasketRepository
     {
         public BasketRepository(BasketDbContext dbContext) : base(dbContext)
-        {
-            
-        }
-
-        public Basket GetByIdWithItems(int id)
-        {
-            return GetByIdAsync(id).Result;
-        }
+        { }
 
         public Task<Basket> GetByIdWithItemsAsync(int id)
         {
