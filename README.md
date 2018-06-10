@@ -1,5 +1,4 @@
 # BasketExercise
-Basket API exercise project
 
 <p>Basket API project is a set of complete Basket .NET Core Web API with an API Client and a User Interface application.</p>
 <p>The complete code of the project can be found on <a target="_blank" href="https://github.com/xmixalis/BasketExercise">GitHub</a> and consists of the following projects. </p>
