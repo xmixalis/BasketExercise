@@ -67,6 +67,7 @@ namespace BasketWebUI
 
             services.AddScoped<IBasketWebService, BasketService>();
             services.AddScoped<IProductService, ProductsService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddTransient<IEmailSender, EmailSender>();

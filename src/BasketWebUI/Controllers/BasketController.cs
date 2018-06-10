@@ -15,14 +15,14 @@ namespace BasketWebUI.Controllers
     public class BasketController : Controller
     {
         private readonly IBasketWebService _basketService;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserService _userService;
 
         public BasketController(
             IBasketWebService basketService,
-            SignInManager<ApplicationUser> signInManager)
+            IUserService userservice)
         {
             _basketService = basketService;
-            _signInManager = signInManager;
+            _userService = userservice;
         }
 
         // GET: Basket
@@ -51,33 +51,11 @@ namespace BasketWebUI.Controllers
 
         async Task<BasketIndexViewModel> GetCurrentUserBasket()
         {
-            //in case of an authenticated user get the basket for the user 
-            //otherwise get anonymous from cookie.
-            string userId;
-            if (_signInManager.IsSignedIn(HttpContext.User))
-            {
-                userId = User.Identity.Name;
-            }
-            else
-            {
-                userId = GetOrSetBasketCookie();
-            }
+            string userId = _userService.GetUserName(HttpContext, Request.Cookies, Response.Cookies);
 
             BasketIndexViewModel b = await _basketService.GetOrCreateBasketForUser(userId);
 
             return b;
-        }
-        private string GetOrSetBasketCookie()
-        {
-            if (Request.Cookies.ContainsKey(Constants.BASKET_COOKIENAME))
-            {
-                return Request.Cookies[Constants.BASKET_COOKIENAME];
-            }
-            string anonymousId = Guid.NewGuid().ToString();
-            var cookieOptions = new CookieOptions();
-            cookieOptions.Expires = DateTime.Today.AddYears(10);
-            Response.Cookies.Append(Constants.BASKET_COOKIENAME, anonymousId, cookieOptions);
-            return anonymousId;
         }
 
         [HttpPost]

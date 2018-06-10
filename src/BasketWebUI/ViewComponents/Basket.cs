@@ -24,8 +24,10 @@ namespace BasketWebUI.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(string userName)
         {
-            var vm = new BasketComponentViewModel();
-            vm.ItemsCount = (await GetBasketViewModelAsync()).BasketItems.Sum(i => i.Quantity);
+            BasketComponentViewModel vm = new BasketComponentViewModel();
+            BasketIndexViewModel basket = await GetBasketViewModelAsync();
+            vm.ItemsCount = basket.BasketItems.Sum(i => i.Quantity);
+
             return View(vm);
         }
 
@@ -36,7 +38,7 @@ namespace BasketWebUI.ViewComponents
                 return await _basketService.GetOrCreateBasketForUser(User.Identity.Name);
             }
             string anonymousId = GetBasketIdFromCookie();
-            if (anonymousId == null) return new BasketIndexViewModel();
+            if (anonymousId == null) return new BasketIndexViewModel() { BasketItems = new System.Collections.Generic.List<BasketItemViewModel>()};
             return await _basketService.GetOrCreateBasketForUser(anonymousId);
         }
 

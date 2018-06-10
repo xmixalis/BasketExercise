@@ -11,13 +11,11 @@ namespace BasketApi.Web.Services
 {
     public class BasketService : IBasketService
     {
-        private readonly IAsyncRepository<Basket> _basketRepositoryAsync;
-        private readonly IBasketRepository _brbasketRepository;
+        private readonly IBasketRepository _basketRepository;
 
-        public BasketService(IAsyncRepository<Basket> basketRepositoryAsync,IBasketRepository br)
+        public BasketService(IBasketRepository basketRepository)
         {
-            _basketRepositoryAsync = basketRepositoryAsync;
-            _brbasketRepository = br;
+            _basketRepository = basketRepository;
         }
 
         #region GetBasketByUserId
@@ -28,12 +26,12 @@ namespace BasketApi.Web.Services
             if (basket == null)
                 basket = await CreateBasketForUser(userId);
 
-            basket = await _brbasketRepository.GetByIdWithItemsAsync(basket.Id);
+            basket = await _basketRepository.GetByIdWithItemsAsync(basket.Id);
             return basket;
         }
         async Task<Basket> GetBasketByUserId(string userId)
         {
-            Basket basket = (await _basketRepositoryAsync.ListAsync(b => b.UserId == userId)).FirstOrDefault();
+            Basket basket = (await _basketRepository.ListAsync(b => b.UserId == userId)).FirstOrDefault();
 
             return basket;
         }
@@ -41,8 +39,8 @@ namespace BasketApi.Web.Services
         {
             //improvement to make the ID of the entity to be auto increment
             Basket basket = new Basket() { UserId = userId };
-            basket.Id = _basketRepositoryAsync.GetNewId(basket);
-            await _basketRepositoryAsync.AddAsync(basket);
+            basket.Id = _basketRepository.GetNewId();
+            await _basketRepository.AddAsync(basket);
 
             return basket;
         }
@@ -51,42 +49,39 @@ namespace BasketApi.Web.Services
 
         public async Task AddItemToBasket(int basketId, int productItemId, decimal price, int quantity)
         {
-            var basket = await _brbasketRepository.GetByIdWithItemsAsync(basketId);
-            //_basketRepository.GetByIdAsync(basketId);
+            Basket basket = await GetBasket(basketId);
 
             basket.AddItem(productItemId, price, quantity);
 
-            await _basketRepositoryAsync.UpdateAsync(basket);
+            await _basketRepository.UpdateAsync(basket);
         }
         public async Task RemoveItemFromBasket(int basketId, int productItemId)
         {
-            Basket basket = await _brbasketRepository.GetByIdWithItemsAsync(basketId);
-                //_basketRepository.GetByIdAsync(basketId);
+            Basket basket = await GetBasket(basketId);
 
             basket.RemoveItem(productItemId);
 
-            await _basketRepositoryAsync.UpdateAsync(basket);
+            await _basketRepository.UpdateAsync(basket);
         }
         public async Task ClearItemsFromBasket(int basketId)
         {
-            Basket basket = await _brbasketRepository.GetByIdWithItemsAsync(basketId);
-                //_basketRepository.GetByIdAsync(basketId);
+            Basket basket = await GetBasket(basketId);
 
             basket.ClearItems();
 
-            await _basketRepositoryAsync.UpdateAsync(basket);
+            await _basketRepository.UpdateAsync(basket);
         }
         public async Task DeleteBasketAsync(int basketId)
         {
-            var basket = await _basketRepositoryAsync.GetByIdAsync(basketId);
+            Basket basket = await GetBasket(basketId);
 
-            await _basketRepositoryAsync.DeleteAsync(basket);
+            await _basketRepository.DeleteAsync(basket);
         }
 
         public async Task<int> GetBasketItemCountAsync(string userName)
         {
-            Utils.ParameterNotNullOrEmpty(userName, nameof(userName));
-            Basket basket = (await _basketRepositoryAsync.ListAsync(b => b.UserId == userName)).FirstOrDefault();
+            Guard.ParameterNotNullOrEmpty(userName, nameof(userName));
+            Basket basket = (await _basketRepository.ListAsync(b => b.UserId == userName)).FirstOrDefault();
             if (basket == null)
             {
                 return 0;
@@ -97,10 +92,8 @@ namespace BasketApi.Web.Services
         }
         public async Task SetQuantities(int basketId, Dictionary<string, int> quantities)
         {
-            Utils.ParameterNotNull(quantities, nameof(quantities));
-            Basket basket = await _brbasketRepository.GetByIdWithItemsAsync(basketId);
-                
-            Utils.EntityNotNull(basketId, basket);
+            Guard.ParameterNotNull(quantities, nameof(quantities));
+            Basket basket = await GetBasket(basketId);
 
             //assumption when an input product to update does not exists in basket products
             //do nothing with this product
@@ -111,7 +104,16 @@ namespace BasketApi.Web.Services
                     item.Quantity = quantity;
                 }
             }
-            await _basketRepositoryAsync.UpdateAsync(basket);
+            await _basketRepository.UpdateAsync(basket);
+        }
+
+        private async Task<Basket> GetBasket(int id)
+        {
+            Basket basket = await _basketRepository.GetByIdWithItemsAsync(id);
+
+            Guard.EntityNotNull(id, basket);
+
+            return basket;
         }
     }
 

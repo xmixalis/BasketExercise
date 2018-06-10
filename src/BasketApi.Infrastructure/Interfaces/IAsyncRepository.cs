@@ -15,6 +15,6 @@ namespace BasketApi.Infrastructure.Interfaces
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        int GetNewId(T entity);
+        int GetNewId();
     }
 }

@@ -26,9 +26,10 @@ namespace BasketApi.Web.Controllers
                 Exception exceptionThatOccurred = exceptionFeature.Error;
                 message = exceptionThatOccurred.Message;
                 // TODO: Do something with the exception
-                // Log it with Log4Net?
-                // Send an e-mail, text?  Maybe all of the above?
+                // Log it with NLog?
+                // Send an e-mail, text? 
             }
+            
             return BadRequest(message);
             //return StatusCode(StatusCodes.Status500InternalServerError);
         }

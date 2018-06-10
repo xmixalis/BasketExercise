@@ -4,7 +4,7 @@ using BasketApi.Web.Exceptions;
 
 namespace BasketApi.Web.Helpers
 {
-    public static class Utils
+    public static class Guard
     {
         public static void ParameterNotNull(object input, string parameterName)
         {

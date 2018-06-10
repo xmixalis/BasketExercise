@@ -50,7 +50,7 @@ namespace BasketApi.Infrastructure.Repos
         }
 
         private static readonly object padlock = new object();
-        public int GetNewId(T entity)
+        public int GetNewId()
         {
             lock (padlock)
             {
