@@ -1,4 +1,4 @@
-# BasketExercise
+# Basket API .NET Core v2.1
 
 <p>Basket API project is a set of complete Basket .NET Core Web API with an API Client and a User Interface application.</p>
 <p>The complete code of the project can be found on <a target="_blank" href="https://github.com/xmixalis/BasketExercise">GitHub</a> and consists of the following projects. </p>
@@ -24,7 +24,7 @@
 	<li>Base API address can be configured in the Web UI project changing the "APIBaseUrl" setting in appsettings.json.</li>
 </ul>
 
-<p><u>Example of using the API Client</u></p?
+<p><u>Example of using the API Client</u></p>
 <p>
 ```
 BasketApiClient client = new BasketApiClient(_config.APIBaseUrl);
