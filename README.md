@@ -20,6 +20,16 @@
     <li>If a user is not authenticated then a unique ID is stored in a cookie and is mapped with a unique Basket ID.</li>
     <li>When a user logs in , a new Basket is created (or retrieved if exists) for the user. An improvement could be to transfer the anonymous basket to the User.</li>
     <li>The user updates the quantities or removes the items for each item separately.</li>
+	<li>API Client project is configured to create a Nuget package configuration file in order to be deployed as a .NET Standard v2.0 library.</li>
+	<li>Base API address can be configured in the Web UI project changing the "APIBaseUrl" setting in appsettings.json.</li>
 </ul>
+
+<p><u>Example of using the API Client</u></p?
+<p>
+```
+BasketApiClient client = new BasketApiClient(_config.APIBaseUrl);
+BasketModelResponse basket = await client.BasketService.GetBasketForUser(userId);
+```
+</p>
 
 <p>You can visit the <a href="/Products">Products page</a> to start adding items to your basket. </p>

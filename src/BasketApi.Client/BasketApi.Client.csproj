@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Api client for connection with the Basket API</Description>
+    <PackageProjectUrl>https://github.com/xmixalis/BasketExercise</PackageProjectUrl>
+    <Authors>Pantelis Chatzimichalis</Authors>
+    <Company>Pantelis Chatzimichalis</Company>
+    <PackageId>Pantelis_BasketApi.Client</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
