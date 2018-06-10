@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketApi.Models", "BasketA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketApi.Client.Tests", "BasketApi.Client.Tests\BasketApi.Client.Tests.csproj", "{EA9A074B-AA24-4DFA-B39B-347BAAEFCB53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketApi.Infrastructure.Tests", "BasketApi.Infrastructure.Tests\BasketApi.Infrastructure.Tests.csproj", "{059BDD87-D1DA-4261-9C57-BA8A287DBFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketApi.Infrastructure.Tests", "BasketApi.Infrastructure.Tests\BasketApi.Infrastructure.Tests.csproj", "{059BDD87-D1DA-4261-9C57-BA8A287DBFE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketApi.Web.Tests", "BasketApi.Web.Tests\BasketApi.Web.Tests.csproj", "{CB7FD684-A213-4989-A535-0233843781FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketApi.Web.Tests", "BasketApi.Web.Tests\BasketApi.Web.Tests.csproj", "{CB7FD684-A213-4989-A535-0233843781FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

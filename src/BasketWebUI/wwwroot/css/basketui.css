@@ -1,0 +1,50 @@
+﻿
+.basket {
+    min-height: 80vh;
+}
+
+.basket-titles {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.basket-titles-clean {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+
+.basket-title {
+    text-transform: uppercase;
+}
+
+.basket-items {
+    padding: 2px;
+    margin: 2px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.basket-item-row {
+    padding: 2px;
+    margin: 2px;
+}
+
+.basket-input {
+    line-height: 1rem;
+    width: 100%;
+}
+
+.basket-empty {
+    padding: 2px;
+    margin: 2px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.basket-continue-shopping {
+    padding: 2px;
+    margin: 2px;
+    font-weight: bold;
+    font-size: larger;
+}

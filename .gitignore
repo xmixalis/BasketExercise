@@ -36,3 +36,5 @@
 /src/BasketApi.Web.Tests/obj
 /src/BasketWebUI/bin/Debug
 /src/BasketWebUI/obj
+/src/BasketApi.Client/bin/Release/netstandard2.0
+/src/BasketWebUI/bin/Release/netcoreapp2.1
