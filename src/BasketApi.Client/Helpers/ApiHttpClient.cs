@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace BasketApi.Client.Helpers
 {
+    /// <summary>
+    /// Client object that is used for all the requests to the server with the Basket API
+    /// </summary>
     internal class ApiHttpClient : IDisposable
     {
         private HttpClient httpClient;
@@ -14,6 +17,10 @@ namespace BasketApi.Client.Helpers
         private readonly JsonSerializerSettings jsonSettings =
     new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
+        /// <summary>
+        /// Constructor of the HTTP client
+        /// </summary>
+        /// <param name="baseAddress">Base address of the API</param>
         public ApiHttpClient(string baseAddress)
         {
             httpClient = new HttpClient();
@@ -51,7 +58,7 @@ namespace BasketApi.Client.Helpers
         /// Submits a GET request to the specified URI within the Base Address
         /// </summary>
         /// <param name="requestUri">URI for GET request.</param>
-        /// <returns></returns>
+        /// <returns>String JSON response</returns>
         public async Task<string> GetAsStringAsync(string requestUri)
         {
             HttpResponseMessage response = httpClient.GetAsync(requestUri).Result;
@@ -66,11 +73,17 @@ namespace BasketApi.Client.Helpers
             return await response.Content.ReadAsStringAsync();
         }
 
+        /// <summary>
+        /// Submits a GET request to the specified URI within the Base Address
+        /// </summary>
+        /// <param name="requestUri">URI for GET request.</param>
+        /// <returns>Object of the specified type</returns>
         public async Task<T> GetAsync<T>(string requestUri)
         {
             string content = await GetAsStringAsync(requestUri);
             return JsonConvert.DeserializeObject<T>(content);
         }
+
         public void Dispose()
         {
             if (httpClient != null)

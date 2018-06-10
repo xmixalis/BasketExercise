@@ -2,6 +2,9 @@
 
 namespace BasketApi.Client
 {
+    /// <summary>
+    /// API client object that gives access to all services supported by the API
+    /// </summary>
     public class BasketApiClient
     {
         private BasketService _basketService;
@@ -12,6 +15,10 @@ namespace BasketApi.Client
 
         private string _baseAddress;
 
+        /// <summary>
+        /// Constructor of the API client
+        /// </summary>
+        /// <param name="baseAddress">Base address of the Basket API</param>
         public BasketApiClient(string baseAddress)
         {
             _baseAddress = baseAddress;

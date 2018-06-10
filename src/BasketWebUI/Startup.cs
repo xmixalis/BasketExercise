@@ -72,7 +72,6 @@ namespace BasketWebUI
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddTransient<IEmailSender, EmailSender>();
 
-            //services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             // Add memory cache services
             services.AddMemoryCache();
 

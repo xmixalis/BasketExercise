@@ -11,8 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace BasketWebUI.Services
 {
     /// <summary>
-    /// This is a UI-specific service so belongs in UI project. It does not contain 
-    /// any business logic and works with UI-specific types.
+    /// This is a UI-specific service so belongs in UI project. 
+    /// It works with UI-specific types.
     /// </summary>
     public class BasketService : IBasketWebService
     {

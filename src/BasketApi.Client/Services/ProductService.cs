@@ -7,14 +7,20 @@ using BasketApi.Models;
 
 namespace BasketApi.Client.Services
 {
+    /// <summary>
+    /// Class that serves requests supported for Products
+    /// </summary>
     public class ProductService:ServiceBase
     {
         public ProductService(string baseAddress) : base(baseAddress) { }
 
+        /// <summary>
+        /// Lits all the products
+        /// </summary>
+        /// <returns>List with the existing ptoducts</returns>
         public async Task<List<ProductModelResponse>> GetProductsAsync()
         {
-            string serviceURI = "api/Product/list";
-            return await new ApiHttpClient(_baseAddress).GetAsync<List<ProductModelResponse>>(serviceURI);
+            return await new ApiHttpClient(_baseAddress).GetAsync<List<ProductModelResponse>>(UriHelpers.ProductListUri);
         }
 
 
