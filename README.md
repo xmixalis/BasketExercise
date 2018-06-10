@@ -10,7 +10,9 @@
     <li>Web Front-end project targeting .NET Core v2.1</li>
     <li>Test projects that are provided as seperate projects</li>
 </ul>
-<p>The Web API and Web UI projects are hosted as Azure services and documentation for the API can be found in the <a target="_blank" href="http://panchbasketapi-live.azurewebsites.net/index.html">Home page of the API url.</a></p>
+<p>The Web API and Web UI projects are hosted as Azure services and documentation for the API can be found in the <a target="_blank" href="http://panchbasketapi-live.azurewebsites.net/index.html">Home page of the API url.</a>.
+</p>
+<p>You can also <a href="http://panchbasketui-live.azurewebsites.net/"> visit the Web UI prototype</a> in order to test the API operations. </p>
 
 <p>Assumptions of the current implementation.</p>
 <ul>
