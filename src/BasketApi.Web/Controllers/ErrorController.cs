@@ -12,6 +12,7 @@ namespace BasketApi.Web.Controllers
     /// Errors controller of the API. 
     /// If a runtime error happens it is redirected here so that is handled if needed.
     /// </summary>
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("[controller]")]
     public class ErrorController : Controller
     {
@@ -21,6 +22,7 @@ namespace BasketApi.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("")]
+        [HttpGet]
         public IActionResult GetAsync()
         {
             // Get the details of the exception that occurred
