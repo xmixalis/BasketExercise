@@ -9,6 +9,9 @@ using BasketApi.Web.ModelConverters;
 
 namespace BasketApi.Web.Controllers
 {
+    /// <summary>
+    /// API controller for Basket operations
+    /// </summary>
     [Route("api/Basket")]
     public class BasketApiController : Controller
     {

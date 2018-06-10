@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BasketApi.Infrastructure;
 using BasketApi.Infrastructure.Interfaces;
+using BasketApi.Infrastructure.Repos;
 using BasketApi.Web.Interfaces;
 using BasketApi.Web.Services;
-using BasketApi.Infrastructure;
-using BasketApi.Infrastructure.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace BasketApi.Web
@@ -28,6 +22,10 @@ namespace BasketApi.Web
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Method that is called by the runtime when the API is on development
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             // use in-memory database
@@ -36,6 +34,10 @@ namespace BasketApi.Web
             ConfigureServices(services);
         }
 
+        /// <summary>
+        /// Method that is called by the runtime when the API is on production
+        /// </summary>
+        /// <param name="services">Services collection</param>
         public void ConfigureProductionServices(IServiceCollection services)
         {
             // use in-memory database. 
@@ -45,6 +47,10 @@ namespace BasketApi.Web
             ConfigureServices(services);
         }
 
+        /// <summary>
+        /// Method to configure in memory databases
+        /// </summary>
+        /// <param name="services"></param>
         private void ConfigureInMemoryDatabases(IServiceCollection services)
         {
             // use in-memory database
@@ -52,7 +58,10 @@ namespace BasketApi.Web
                 c.UseInMemoryDatabase(databaseName: "BasketDB"));
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Method that is called by runtime in order to add services to the container
+        /// </summary>
+        /// <param name="services">Services collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
@@ -70,14 +79,14 @@ namespace BasketApi.Web
             _services = services;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Method that is called by the runtime in order to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">App builder</param>
+        /// <param name="env">Hosting envinroment</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            if (!env.IsDevelopment())
                 app.UseExceptionHandler("/Error");
 
             app.UseHttpsRedirection();

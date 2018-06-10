@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace BasketApi.Web.Controllers
 {
+    /// <summary>
+    /// API controller for product operations
+    /// </summary>
     [Route("api/Product")]
     public class ProductApiController : Controller
     {
@@ -19,6 +22,10 @@ namespace BasketApi.Web.Controllers
             _productsService = productService;
         }
 
+        /// <summary>
+        /// Lists all products of the database
+        /// </summary>
+        /// <returns>List with details of products</returns>
         [HttpGet("list")]
         public async Task<List<ProductModelResponse>> GetProducts()
         {

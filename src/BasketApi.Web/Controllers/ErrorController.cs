@@ -1,22 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasketApi.Web.Controllers
 {
+    /// <summary>
+    /// Errors controller of the API. 
+    /// If a runtime error happens it is redirected here so that is handled if needed.
+    /// </summary>
     [Route("[controller]")]
     public class ErrorController : Controller
     {
+
+        /// <summary>
+        /// Get and handle (if needed) the error
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
-        public IActionResult Get()
+        public IActionResult GetAsync()
         {
             // Get the details of the exception that occurred
             var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            string message="";
+
             if (exceptionFeature != null)
             {
                 // Get which route the exception occurred at
@@ -24,14 +33,14 @@ namespace BasketApi.Web.Controllers
 
                 // Get the exception that occurred
                 Exception exceptionThatOccurred = exceptionFeature.Error;
-                message = exceptionThatOccurred.Message;
+
                 // TODO: Do something with the exception
                 // Log it with NLog?
                 // Send an e-mail, text? 
+                
             }
             
-            return BadRequest(message);
-            //return StatusCode(StatusCodes.Status500InternalServerError);
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }
