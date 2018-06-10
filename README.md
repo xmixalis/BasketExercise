@@ -26,7 +26,7 @@
 
 <p><u>Example of using the API Client</u></p>
 
-```
+```csharp
 BasketApiClient client = new BasketApiClient("http://apibaseurl");
 BasketModelResponse basket = await client.BasketService.GetBasketForUser(userId);
 ```
