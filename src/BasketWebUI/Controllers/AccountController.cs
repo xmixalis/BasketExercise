@@ -72,9 +72,8 @@ namespace BasketWebUI.Controllers
                 string anonymousBasketId = Request.Cookies[Constants.BASKET_COOKIENAME];
                 if (!String.IsNullOrEmpty(anonymousBasketId))
                 {
-                    //TODO:: TransferBasketClientCall
-                    //await _basketService.TransferBasketAsync(anonymousBasketId, model.Email);
-                    //Response.Cookies.Delete(Constants.BASKET_COOKIENAME);
+                    //TODO:: Transfer Basket to user ApiClient call
+                    //and delete cookie?
                 }
                 return RedirectToLocal(returnUrl);
             }
