@@ -16,22 +16,22 @@ namespace BasketApi.Web
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
+            IWebHost host = CreateWebHostBuilder(args)
                         .Build();
 
-            using (var scope = host.Services.CreateScope())
+            using (IServiceScope scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                IServiceProvider services = scope.ServiceProvider;
+                ILoggerFactory loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 try
                 {
-                    var catalogContext = services.GetRequiredService<BasketDbContext>();
+                    //Create some sample data
+                    BasketDbContext catalogContext = services.GetRequiredService<BasketDbContext>();
                     DBContextSeed.InitAsync(catalogContext, loggerFactory).Wait();
-
                 }
                 catch (Exception ex)
                 {
-                    var logger = loggerFactory.CreateLogger<Program>();
+                    ILogger logger = loggerFactory.CreateLogger<Program>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }

@@ -7,34 +7,27 @@ using Microsoft.Extensions.Logging;
 
 namespace BasketApi.Infrastructure
 {
+    /// <summary>
+    /// Class for template data for the prototype
+    /// </summary>
     public class DBContextSeed
     {
-        public static async Task InitAsync(BasketDbContext dbContext, 
-            ILoggerFactory loggerFactory, int? retry = 0)
+        public static async Task InitAsync(BasketDbContext dbContext,
+            ILoggerFactory loggerFactory)
         {
-            int retryForAvailability = retry.Value;
-            try
+            if (!dbContext.ProductItems.Any())
             {
-                if (!dbContext.ProductItems.Any())
-                {
-                    //add some sample data
-                    dbContext.ProductItems.AddRange( GetPreconfiguredItems() );
+                //add some sample data
+                dbContext.ProductItems.AddRange(GetPreconfiguredItems());
 
-                    await dbContext.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (retryForAvailability < 10)
-                {
-                    retryForAvailability++;
-                    var log = loggerFactory.CreateLogger<DBContextSeed>();
-                    log.LogError(ex.Message);
-                    await InitAsync(dbContext, loggerFactory, retryForAvailability);
-                }
+                await dbContext.SaveChangesAsync();
             }
         }
 
+        /// <summary>
+        /// Template data for the prototype
+        /// </summary>
+        /// <returns>Product items template data</returns>
         static IEnumerable<ProductItem> GetPreconfiguredItems()
         {
             return new List<ProductItem>()

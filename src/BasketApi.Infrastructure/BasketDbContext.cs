@@ -17,12 +17,20 @@ namespace BasketApi.Infrastructure
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }
 
+        /// <summary>
+        /// Definition of the configuration that is supported for the database entities 
+        /// </summary>
+        /// <param name="builder">Model builder</param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Basket>(ConfigureBasket);
             builder.Entity<ProductItem>(ConfigureProductItem);
         }
 
+        /// <summary>
+        /// Basket table specific configuration
+        /// </summary>
+        /// <param name="builder">Basket entity builder</param>
         private void ConfigureBasket(EntityTypeBuilder<Basket> builder)
         {
             builder.ToTable("Basket");
@@ -30,7 +38,11 @@ namespace BasketApi.Infrastructure
             var navigation = builder.Metadata.FindNavigation(nameof(Basket.Items));
             navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
         }
-        
+
+        /// <summary>
+        /// Product table specific configuration
+        /// </summary>
+        /// <param name="builder">Product entity builder</param>
         private void ConfigureProductItem(EntityTypeBuilder<ProductItem> builder)
         {
             builder.ToTable("Product");
