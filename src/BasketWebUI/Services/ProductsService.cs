@@ -18,18 +18,20 @@ namespace BasketWebUI.Services
     {
         //depedencies to inject
         private readonly ILogger<ProductsService> _logger;
+        private readonly BasketAPISettings _config;
 
         //constructor
-        public ProductsService(ILoggerFactory loggerFactory)
+        public ProductsService(ILoggerFactory loggerFactory, BasketAPISettings config)
         {
             _logger = loggerFactory.CreateLogger<ProductsService>();
+            _config = config;
         }
 
         public ProductsIndexViewModel GetProductItems()
         {
             _logger.LogInformation("GetProductItems called.");
 
-            BasketApiClient client = new BasketApiClient("http://localhost:54000");
+            BasketApiClient client = new BasketApiClient(_config.APIBaseUrl);
             IEnumerable<ProductModelResponse> items = client.ProductService.GetProductsAsync().Result;
             
             //imrovment could be to add paging 

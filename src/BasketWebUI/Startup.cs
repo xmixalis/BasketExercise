@@ -48,6 +48,10 @@ namespace BasketWebUI
         // This method gets called by the runtime. Used to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            BasketAPISettings config = new BasketAPISettings();
+            Configuration.Bind("BasketAPISettings", config);
+            services.AddSingleton(config);
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
