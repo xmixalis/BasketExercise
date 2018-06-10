@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -81,9 +82,9 @@ namespace BasketApi.Web
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
             // Register the Swagger generator for the documentation
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("v1", new Info
                 {
                     Title = "Basket API",
                     Version = "v1",
@@ -97,13 +98,16 @@ namespace BasketApi.Web
                     }
                 });
 
-                // Set the comments path for the Swagger JSON and UI.
-                //string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //c.IncludeXmlComments(xmlPath);
+                options.IncludeXmlComments(GetXmlCommentsPath());
+                options.DescribeAllEnumsAsStrings();
             });
 
             _services = services;
+        }
+
+        private static string GetXmlCommentsPath()
+        {
+            return Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, $"{PlatformServices.Default.Application.ApplicationName}.xml");
         }
 
         /// <summary>
