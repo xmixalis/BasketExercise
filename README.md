@@ -25,11 +25,10 @@
 </ul>
 
 <p><u>Example of using the API Client</u></p>
-<p>
+
 ```
-BasketApiClient client = new BasketApiClient(_config.APIBaseUrl);
+BasketApiClient client = new BasketApiClient("http://apibaseurl");
 BasketModelResponse basket = await client.BasketService.GetBasketForUser(userId);
 ```
-</p>
 
 <p>You can visit the <a href="/Products">Products page</a> to start adding items to your basket. </p>
