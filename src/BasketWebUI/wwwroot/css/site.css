@@ -77,4 +77,9 @@
     line-height: 1rem;
     width: 100%;
 }
-
+.basket-empty {
+    padding: 2px;
+    margin: 2px;
+    font-weight: bold;
+    font-size: larger;
+}

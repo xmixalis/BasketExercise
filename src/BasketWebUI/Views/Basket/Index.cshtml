@@ -6,67 +6,70 @@
 <div class="container">
     @if (Model.BasketItems.Any())
     {
-        
-    <article class="basket-titles row">
-        <br />
-        <section class="basket-title col-xs-4">Product</section>
-        <section class="basket-title col-xs-3">Price</section>
-        <section class="basket-title col-xs-1">Quantity</section>
-        <section class="basket-title col-xs-1"></section>
-        <section class="basket-title col-xs-2">Cost</section>
-        <section class="basket-title col-xs-1"></section>
-    </article>
-            <div class="row">
-                @for (int i = 0; i < Model.BasketItems.Count; i++)
-                {
-                    var item = Model.BasketItems[i];
-                    <article class="basket-item-row row">
-                        <div>
-                            <section class="basket-item col-xs-4">@item.ProductName</section>
-                            <section class="basket-item col-xs-3">$ @item.UnitPrice.ToString("N2")</section>
-                            <form method="post">
-                                <section class="basket-item col-xs-1">
-                                    <input type="hidden" name="@("Items[" + 0 + "].Key")" value="@item.ProductItemId" />
-                                    <input type="number" class="basket-input" min="1" name="@("Items[" + 0 + "].Value")" value="@item.Quantity" />
-                                </section>
-                                <section class="basket-item col-xs-1">
-                                    <button class="btn-basket-update" name="updatebutton" value="" type="submit"
-                                            asp-action="UpdateItem">Update                           
-                                    </button>
-                                </section>
-                            </form>
-                            <section class="basket-item col-xs-2">£ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
-                            <form method="post">
-                                <section class="basket-item col-xs-1">
-                                    <input type="hidden" name="productId" value="@item.ProductItemId" />
-                                    <button class="btn-basket-delete" name="deletebutton" value="" type="submit"
-                                            asp-action="RemoveItem">
-                                        Delete
-                                    </button>
-                                </section>
-                            </form>
-                        </div>
-                        <div class="row">
-                        </div>
-                    </article>
-                }
 
-                <div class="container">
-                    <article class="basket-titles basket-items row">
-                        <section class="basket-title col-xs-9"></section>
-                        <section class="basket-title col-xs-3">Total</section>
-                    </article>
-                    <article class="basket-items row">
-                        <section class="basket-item col-xs-9"></section>
-                        <section class="basket-item col-xs-3">£ @Model.Total()</section>
-                    </article>
-                </div>
+        <article class="basket-titles row">
+            <br />
+            <section class="basket-title col-xs-4">Product</section>
+            <section class="basket-title col-xs-3">Price</section>
+            <section class="basket-title col-xs-1">Quantity</section>
+            <section class="basket-title col-xs-1"></section>
+            <section class="basket-title col-xs-2">Cost</section>
+            <section class="basket-title col-xs-1"></section>
+        </article>
+        <div class="row">
+            @for (int i = 0; i < Model.BasketItems.Count; i++)
+            {
+                var item = Model.BasketItems[i];
+                <article class="basket-item-row row">
+                    <div>
+                        <section class="basket-item col-xs-4">@item.ProductName</section>
+                        <section class="basket-item col-xs-3">$ @item.UnitPrice.ToString("N2")</section>
+                        <form method="post">
+                            <section class="basket-item col-xs-1">
+                                <input type="hidden" name="@("Items[" + 0 + "].Key")" value="@item.ProductItemId" />
+                                <input type="number" class="basket-input" min="1" name="@("Items[" + 0 + "].Value")" value="@item.Quantity" />
+                            </section>
+                            <section class="basket-item col-xs-1">
+                                <button class="btn-basket-update" name="updatebutton" value="" type="submit"
+                                        asp-action="UpdateItem">
+                                    Update
+                                </button>
+                            </section>
+                        </form>
+                        <section class="basket-item col-xs-2">£ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
+                        <form method="post">
+                            <section class="basket-item col-xs-1">
+                                <input type="hidden" name="productId" value="@item.ProductItemId" />
+                                <button class="btn-basket-delete" name="deletebutton" value="" type="submit"
+                                        asp-action="RemoveItem">
+                                    Delete
+                                </button>
+                            </section>
+                        </form>
+                    </div>
+                    <div class="row">
+                    </div>
+                </article>
+            }
+
+            <div class="container">
+                <article class="basket-titles basket-items row">
+                    <section class="basket-title col-xs-9"></section>
+                    <section class="basket-title col-xs-3">Total</section>
+                </article>
+                <article class="basket-items row">
+                    <section class="basket-item col-xs-9"></section>
+                    <section class="basket-item col-xs-3">£ @Model.Total()</section>
+                </article>
             </div>
+        </div>
     }
     else
     {
         <div class="basket-empty row">
-            Basket is empty.
+            Basket is empty.<br />
+            <a asp-area="" asp-controller="Products" asp-action="Index">Continue shopping</a>
         </div>
+        
     }
 </div>
