@@ -5,6 +5,9 @@ using Xunit;
 
 namespace BasketApi.Infrastructure.Tests
 {
+    /// <summary>
+    /// API Basket tests
+    /// </summary>
     public class BasketTests
     {
         private int _productItemId = 1;

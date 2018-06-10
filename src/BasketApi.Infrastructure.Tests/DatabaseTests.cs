@@ -9,6 +9,9 @@ using System;
 
 namespace BasketApi.Infrastructure.Tests
 {
+    /// <summary>
+    /// Database fixture for the database tests provided
+    /// </summary>
     public class DatabaseFixture : IDisposable
     {
         public DatabaseFixture()
@@ -40,6 +43,9 @@ namespace BasketApi.Infrastructure.Tests
         public BasketRepository basketRepository { get; private set; }
     }
 
+    /// <summary>
+    /// Database tests class
+    /// </summary>
     public class DatabaseTests : IClassFixture<DatabaseFixture>
     {
         DatabaseFixture fixture;
