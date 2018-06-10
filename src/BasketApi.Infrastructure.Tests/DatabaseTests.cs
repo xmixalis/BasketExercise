@@ -52,22 +52,22 @@ namespace BasketApi.Infrastructure.Tests
         }
 
         [Fact]
-        public void GetExistingBasket()
+        public async void GetExistingBasket()
         {
             _output.WriteLine($"BasketId: {fixture.TestBasketId}");
 
-            Basket basketFromRepo = fixture.basketRepository.GetById(fixture.TestBasketId);
+            Basket basketFromRepo = await fixture.basketRepository.GetByIdAsync(fixture.TestBasketId);
             basketFromRepo.Should().NotBeNull();
             basketFromRepo.Id.Should().Be(fixture.TestBasketId);
         }
 
         [Fact]
-        public void GetExistingBasketItem()
+        public async void GetExistingBasketItem()
         {
             _output.WriteLine($"BasketId: {fixture.TestBasketId}");
             _output.WriteLine($"BasketItemId: {fixture.TestItemId}");
 
-            Basket basketFromRepo = fixture.basketRepository.GetById(fixture.TestBasketId);
+            Basket basketFromRepo = await fixture.basketRepository.GetByIdAsync(fixture.TestBasketId);
             BasketItem firstItem = basketFromRepo.Items.FirstOrDefault();
 
             firstItem.Should().NotBeNull();

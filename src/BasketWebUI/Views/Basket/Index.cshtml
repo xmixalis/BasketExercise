@@ -67,9 +67,11 @@
     else
     {
         <div class="basket-empty row">
-            Basket is empty.<br />
-            <a asp-area="" asp-controller="Products" asp-action="Index">Continue shopping</a>
+            Basket is empty.
         </div>
-        
     }
+    <div class="basket-continue-shopping">
+        <a asp-area="" asp-controller="Products" asp-action="Index">Continue shopping</a>
+    </div>
+
 </div>

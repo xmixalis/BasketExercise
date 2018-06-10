@@ -6,7 +6,7 @@ using BasketApi.Infrastructure.Entities;
 
 namespace BasketApi.Infrastructure.Interfaces
 {
-    public interface IBasketRepository : IRepository<Basket>, IAsyncRepository<Basket>
+    public interface IBasketRepository : IAsyncRepository<Basket>
     {
         Basket GetByIdWithItems(int id);
         Task<Basket> GetByIdWithItemsAsync(int id);

@@ -11,7 +11,6 @@ namespace BasketApi.Infrastructure.Interfaces
     {
         Task<T> GetByIdAsync(int id);
         Task<List<T>> ListAllAsync();
-        Task<List<T>> ListAsync(ISpecification<T> spec);
         Task<List<T>> ListAsync(Expression<Func<T, bool>> criteria);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
