@@ -81,7 +81,7 @@ namespace BasketWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateBasket(Dictionary<int, int> items)
+        public async Task<IActionResult> UpdateItem(Dictionary<int, int> items)
         {
             if (items == null)
             {
