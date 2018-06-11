@@ -34,7 +34,6 @@ using BasketApi.Client;
 ```
 
 ```csharp
-BasketApi.Client
 BasketApiClient client = new BasketApiClient("http://apibaseurl");
 BasketModelResponse basket = await client.BasketService.GetBasketForUser(userId);
 ```
