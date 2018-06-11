@@ -21,6 +21,7 @@
     <li>When a user logs in , a new Basket is created (or retrieved if exists) for the user. An improvement could be to transfer the anonymous basket to the User.</li>
     <li>The user updates the quantities or removes the items for each item separately.</li>
 	<li>API Client project is configured to create a Nuget package configuration file in order to be deployed as a .NET Standard v2.0 library.</li>
+	<li>Checkout library can be integrated with the current Web UI once it have been created as a different library.</li>
 	<li>Base API address can be configured in the Web UI project changing the "APIBaseUrl" setting in appsettings.json.</li>
 	<li>Live Web UI and API have been connected with Azure Application Insights for performance monitoring. </li>
 </ul>
