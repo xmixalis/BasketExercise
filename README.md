@@ -28,6 +28,7 @@
  <p>
  In order to integrate with the API using the API client provided yoy have to add a using statetement for the client library and access one of the services provided with the client;</p>
 <p><u>Example of using the API Client</u></p>
+
 ```csharp
 using BasketApi.Client;
 ```
