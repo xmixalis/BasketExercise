@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/c240ec11-a99a-436c-83a2-15dc6a042bdd/resourcegroups/panchBasketApi/providers/microsoft.insights/components/panchBasketApi</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/c240ec11-a99a-436c-83a2-15dc6a042bdd/resourcegroups/panchBasketApi/providers/microsoft.insights/components/panchBasketApi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -34,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
@@ -46,6 +49,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BasketApi.Infrastructure\BasketApi.Infrastructure.csproj" />
     <ProjectReference Include="..\BasketApi.Models\BasketApi.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

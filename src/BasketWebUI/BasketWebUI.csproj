@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/c240ec11-a99a-436c-83a2-15dc6a042bdd/resourcegroups/panchBasketUI/providers/microsoft.insights/components/panchBasketUI</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/c240ec11-a99a-436c-83a2-15dc6a042bdd/resourcegroups/panchBasketUI/providers/microsoft.insights/components/panchBasketUI</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
 	
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
@@ -35,6 +38,10 @@
     <Content Update="Views\Products\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
