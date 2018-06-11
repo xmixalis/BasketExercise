@@ -32,5 +32,3 @@
 BasketApiClient client = new BasketApiClient("http://apibaseurl");
 BasketModelResponse basket = await client.BasketService.GetBasketForUser(userId);
 ```
-
-<p>You can visit the <a href="/Products">Products page</a> to start adding items to your basket. </p>
