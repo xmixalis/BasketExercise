@@ -22,6 +22,7 @@
     <li>The user updates the quantities or removes the items for each item separately.</li>
 	<li>API Client project is configured to create a Nuget package configuration file in order to be deployed as a .NET Standard v2.0 library.</li>
 	<li>Base API address can be configured in the Web UI project changing the "APIBaseUrl" setting in appsettings.json.</li>
+	<li>Live Web UI and API have been connected with Azure Application Insights for performance monitoring. </li>
 </ul>
 
 <p><u>Example of using the API Client</u></p>
