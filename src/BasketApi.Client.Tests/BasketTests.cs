@@ -12,7 +12,7 @@ namespace BasketApi.Client.Tests
     /// </summary>
     public class BasketTests
     {
-        BasketApiClient client = new BasketApiClient("http://localhost:54000");
+        BasketApiClient client = new BasketApiClient("http://basketapiweb-prod.us-west-2.elasticbeanstalk.com");
 
         [Fact]
         public async void BasketIsCreatedAndRetrievedForUser()
@@ -173,5 +173,30 @@ namespace BasketApi.Client.Tests
             items.First().ProductId.Should().Be(3);
         }
 
+        [Fact]
+        public async void BasketCreatAndAddManyItems()
+        {
+            string userId = "demouser@panch.com";
+
+            List<ProductModelResponse> productsResponse = await client.ProductService.GetProductsAsync();
+            BasketModelResponse basketResponse = await client.BasketService.GetBasketForUser(userId);
+            foreach(var b in basketResponse.Items)
+            {
+                await client.BasketService.RemoveBasketItem(basketResponse.BasketId, new BasketRemoveItemRequest() { ProductId = b.ProductId });
+            }
+
+            foreach (ProductModelResponse i in  productsResponse)
+            {
+                BasketAddItemResponse resp = await client.BasketService.AddBasketItem(basketResponse.BasketId, new BasketAddItemRequest()
+                {
+                    Price = i.Price,
+                    ProductId = i.ProductId,
+                    Quantity = 1
+                });
+            };
+
+            basketResponse = await client.BasketService.GetBasketForUser(userId);
+            basketResponse.Items.Count().Should().Be(productsResponse.Count());
+        }
     }
 }

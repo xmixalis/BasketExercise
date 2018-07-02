@@ -12,7 +12,7 @@ namespace BasketApi.Client.Tests
     /// </summary>
     public class ProductTests
     {
-        BasketApiClient client = new BasketApiClient("http://localhost:54000");
+        BasketApiClient client = new BasketApiClient("http://basketapiweb-prod.us-west-2.elasticbeanstalk.com");
 
         [Fact]
         public async void SampleProductsAreListed()
