@@ -174,12 +174,16 @@ namespace BasketApi.Client.Tests
             items.First().ProductId.Should().Be(3);
         }
 
-        async Task clearBasket(BasketModelResponse basketResponse)
+        async Task<List<BasketRemoveItemResponse>> clearBasket(BasketModelResponse basketResponse)
         {
+            List<BasketRemoveItemResponse> ret = new List<BasketRemoveItemResponse>();
             foreach (var b in basketResponse.Items)
             {
-                await client.BasketService.RemoveBasketItem(basketResponse.BasketId, new BasketRemoveItemRequest() { ProductId = b.ProductId });
+               BasketRemoveItemResponse r = await client.BasketService.RemoveBasketItem(basketResponse.BasketId, new BasketRemoveItemRequest() { ProductId = b.ProductId });
+                ret.Add(r);
             }
+
+            return ret;
         }
 
         [Fact]
@@ -225,6 +229,16 @@ namespace BasketApi.Client.Tests
             });
 
             baskets.Count().Should().Be(10);
+
+            baskets.AsParallel().ForAll(b =>
+            {
+                List<BasketRemoveItemResponse> r = clearBasket(b).Result;
+            });
+
+            baskets.AsParallel().ForAll(basket =>
+            {
+                basket.Items.Count().Should().Be(0);
+            });
 
             baskets.AsParallel().ForAll(basket=>
             {
