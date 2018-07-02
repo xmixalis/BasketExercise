@@ -4,6 +4,7 @@ using Xunit;
 using FluentAssertions;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace BasketApi.Client.Tests
 {
@@ -173,6 +174,14 @@ namespace BasketApi.Client.Tests
             items.First().ProductId.Should().Be(3);
         }
 
+        async Task clearBasket(BasketModelResponse basketResponse)
+        {
+            foreach (var b in basketResponse.Items)
+            {
+                await client.BasketService.RemoveBasketItem(basketResponse.BasketId, new BasketRemoveItemRequest() { ProductId = b.ProductId });
+            }
+        }
+
         [Fact]
         public async void BasketCreateAndAddAllItems()
         {
@@ -180,10 +189,8 @@ namespace BasketApi.Client.Tests
 
             List<ProductModelResponse> productsResponse = await client.ProductService.GetProductsAsync();
             BasketModelResponse basketResponse = await client.BasketService.GetBasketForUser(userId);
-            foreach(var b in basketResponse.Items)
-            {
-                await client.BasketService.RemoveBasketItem(basketResponse.BasketId, new BasketRemoveItemRequest() { ProductId = b.ProductId });
-            }
+
+            await clearBasket(basketResponse);
 
             foreach (ProductModelResponse i in  productsResponse)
             {
@@ -197,6 +204,53 @@ namespace BasketApi.Client.Tests
 
             basketResponse = await client.BasketService.GetBasketForUser(userId);
             basketResponse.Items.Count().Should().Be(productsResponse.Count());
+        }
+
+        [Fact]
+        public async void BasketLoadTest()
+        {
+            HashSet<string> users = new HashSet<string>();
+            for (int i= 1; i <= 10; i++)
+            {
+                users.Add($"User{i}");
+            }
+
+            List<ProductModelResponse> productsResponse = await client.ProductService.GetProductsAsync();
+
+            List<BasketModelResponse> baskets = new List<BasketModelResponse>();
+            users.AsParallel().ForAll(user=> 
+            {
+                BasketModelResponse basketResponse =  client.BasketService.GetBasketForUser(user.ToString()).Result;
+                lock (baskets) { baskets.Add(basketResponse); }
+            });
+
+            baskets.Count().Should().Be(10);
+
+            baskets.AsParallel().ForAll(basket=>
+            {
+                foreach (ProductModelResponse i in productsResponse)
+                {
+                    BasketAddItemResponse resp = client.BasketService.AddBasketItem(basket.BasketId, new BasketAddItemRequest()
+                    {
+                        Price = i.Price,
+                        ProductId = i.ProductId,
+                        Quantity = 1
+                    }).Result;
+                };
+            });
+
+            baskets.Clear();
+            users.AsParallel().ForAll(user =>
+            {
+                BasketModelResponse basketResponse = client.BasketService.GetBasketForUser(user.ToString()).Result;
+                lock (baskets) { baskets.Add(basketResponse); }
+            });
+            baskets.Count().Should().Be(10);
+
+            baskets.AsParallel().ForAll(basket =>
+            {
+                basket.Items.Count().Should().Be(productsResponse.Count());
+            });
         }
     }
 }
