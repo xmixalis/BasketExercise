@@ -174,7 +174,7 @@ namespace BasketApi.Client.Tests
         }
 
         [Fact]
-        public async void BasketCreatAndAddManyItems()
+        public async void BasketCreateAndAddAllItems()
         {
             string userId = "demouser@panch.com";
 
