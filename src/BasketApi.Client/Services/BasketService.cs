@@ -57,5 +57,15 @@ namespace BasketApi.Client.Services
         {
             return await new ApiHttpClient(_baseAddress).PostAsJsonAsync<BasketRemoveItemResponse>(UriHelpers.RemoveBasketItemUri(basketId), itemRequest);
         }
+
+        /// <summary>
+        /// Clears all items from a basket
+        /// </summary>
+        /// <param name="basketId">Basket ID</param>
+        /// <returns>ction success response</returns>
+        public async Task<BasketResponseBase> ClearBasketItem(int basketId)
+        {
+            return await new ApiHttpClient(_baseAddress).PostAsJsonAsync<BasketResponseBase>(UriHelpers.ClearBasketItemsUri(basketId), null);
+        }
     }
 }

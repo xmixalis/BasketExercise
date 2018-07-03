@@ -74,6 +74,18 @@ namespace BasketApi.Web.Controllers
         }
 
         /// <summary>
+        /// Action that clears all items from the basket
+        /// </summary>
+        /// <param name="basketid">Basket ID</param>
+        /// <returns>Success if it is successfull</returns>
+        [HttpPost("ClearItems/{basketid}")]
+        public async Task<IActionResult> ClearItemFromBasket(int basketid)
+        {
+            await _basketService.ClearItemsFromBasket(basketid);
+            return Ok(new BasketResponseBase() { Success = true });
+        }
+
+        /// <summary>
         /// Action that adds an item to the basket.
         /// If the item exists, it increases the quantity.
         /// </summary>
